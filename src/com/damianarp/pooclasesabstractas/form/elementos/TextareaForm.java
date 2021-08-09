@@ -36,7 +36,7 @@ public class TextareaForm extends ElementoForm{
         return "<textarea " +
                 "name=\"" + this.nombre
                 + "\" cols=\"" + this.columnas
-                + "\" rows=\"" + this.filas + ">"
+                + "\" rows=\"" + this.filas + "\">"
                 + this.valor
                 + "</textarea>";
     }
