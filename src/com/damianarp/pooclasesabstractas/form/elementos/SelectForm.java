@@ -10,7 +10,7 @@ public class SelectForm extends ElementoForm{
 
     public SelectForm(String nombre) {
         super(nombre);
-        this.opciones = new ArrayList<Opcion>(); // Debemos inicializar el List opciones como un ArrayList, lo hacemos en el primer constructor,
+        this.opciones = new ArrayList<Opcion>(); // Debemos inicializar el List opciones como un ArrayList vacío, lo hacemos en el primer constructor,
         // en el segundo constructor no hace falta porque ya se pasó como parámetro.
     }
 
@@ -44,6 +44,7 @@ public class SelectForm extends ElementoForm{
                     .append("\"");
             if(opcion.isSelected()){
                 sb.append(" selected"); // Si se selecciona un elemento se agrega este atributo al html.
+                this.valor = opcion.getValor(); 
             }
             sb.append(">").append(opcion.getNombre())
                     .append("</option>");
