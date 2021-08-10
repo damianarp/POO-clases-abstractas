@@ -36,6 +36,10 @@ abstract public class ElementoForm {
         return errores;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
     // Método para agregar validadores desde afuera de la clase.
     public ElementoForm addValidador(Validador validador){
         this.validadores.add(validador);

@@ -2,6 +2,7 @@ package com.damianarp.pooclasesabstractas.form;
 
 import com.damianarp.pooclasesabstractas.form.elementos.*;
 import com.damianarp.pooclasesabstractas.form.elementos.select.Opcion;
+import com.damianarp.pooclasesabstractas.form.validador.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,12 +20,6 @@ public class Formulario {
 
         // Creamos una instancia de SelectForm
         SelectForm lenguaje = new SelectForm("lenguaje");
-        // Agregamos las opciones.
-        lenguaje.addOpcion(new Opcion("1", "Java"))
-                .addOpcion(new Opcion("2", "Python"))
-                .addOpcion(new Opcion("3", "JavaScript"))
-                .addOpcion(new Opcion("4", "TypeScript").setSelected()) // Seleccionamos TypeScript del SelectForm.
-                .addOpcion(new Opcion("5", "PHP"));
 
         // Creamos un objeto saludar del tipo ElementoForm con una la clase anónima para crear un input disabled.
         // <input disabled name="this.nombre" value="this.valor">
@@ -37,21 +32,48 @@ public class Formulario {
             }
         };
 
-        // Agregamos valores.
+        // Agregamos valores a los objetos y luego sus validadores.
         username.setValor("john.doe");
-        password.setValor("12345");
+        username.addValidador(new RequeridoValidador());
+
+        password.setValor("123456");
+        password.addValidador(new RequeridoValidador())
+                        .addValidador(new LargoValidador(6, 12));
+
         email.setValor("john.doe@correo.com");
+        email.addValidador(new RequeridoValidador())
+                        .addValidador(new EmailValidador());
+
         edad.setValor("33");
+        edad.addValidador(new NumeroValidador());
+
         experiencia.setValor("... más de 10 años de experiencia ...");
+        experiencia.addValidador(new RequeridoValidador());
+
+        lenguaje.addOpcion(new Opcion("1", "Java"))
+                .addOpcion(new Opcion("2", "Python"))
+                .addOpcion(new Opcion("3", "JavaScript"))
+                .addOpcion(new Opcion("4", "TypeScript").setSelected()) // Seleccionamos TypeScript del SelectForm.
+                .addOpcion(new Opcion("5", "PHP"));
+        lenguaje.addValidador(new NoNuloValidador());
+
         saludar.setValor("Hola! Que tal? Este campo está deshabilitado!");
 
         // Creamos un List para agregar todos los objetos creados.
         List<ElementoForm> elementos = Arrays.asList(username, password, email, edad, experiencia, lenguaje, saludar);
 
-        // Iteramos a través de la Api Stream con una expresión lambda.
-        elementos.forEach( e -> {
+        // Iteramos la lista de elementos a través de la Api Stream con una expresión lambda.
+        elementos.forEach(e -> {
             System.out.println(e.dibujarHtml());
             System.out.println("<br>");
+        });
+
+        // Luego de dibujar el html, iteramos la lista de elementos y validamos los campos.
+        elementos.forEach(e -> {
+            // Si el elemento no es válido, recorremos con un foreach encadenado la lista de errores y lo imprimimos.
+            if (!e.esValido()){
+                e.getErrores().forEach(err -> System.out.println(e.getNombre() + ": " + err));
+            }
         });
     }
 }
