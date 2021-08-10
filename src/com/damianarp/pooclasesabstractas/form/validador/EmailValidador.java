@@ -1,7 +1,7 @@
 package com.damianarp.pooclasesabstractas.form.validador;
 
 public class EmailValidador extends Validador{
-    protected String mensaje = "El formato del correo no es válido";
+    protected String mensaje = "El campo %s tiene un formato de correo inválido";
 
     // Definimos una constante para la expresión regular simple.
     private final static String EMAIL_REGEX = "(.+)@(.+)$";

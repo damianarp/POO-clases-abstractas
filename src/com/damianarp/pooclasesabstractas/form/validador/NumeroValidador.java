@@ -1,7 +1,7 @@
 package com.damianarp.pooclasesabstractas.form.validador;
 
 public class NumeroValidador extends Validador{
-    protected String mensaje = "El campo debe ser numérico";
+    protected String mensaje = "El campo %s debe ser numérico";
 
     @Override
     public String getMensaje() {

@@ -1,5 +1,6 @@
 package com.damianarp.pooclasesabstractas.form.elementos;
 
+import com.damianarp.pooclasesabstractas.form.validador.LargoValidador;
 import com.damianarp.pooclasesabstractas.form.validador.Validador;
 
 import java.util.ArrayList;
@@ -36,10 +37,6 @@ abstract public class ElementoForm {
         return errores;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
     // Método para agregar validadores desde afuera de la clase.
     public ElementoForm addValidador(Validador validador){
         this.validadores.add(validador);
@@ -52,7 +49,12 @@ abstract public class ElementoForm {
         for (Validador v : this.validadores) {
             // Si no es válido, se muestra el mensaje de error de cada validador.
             if (!v.esValido(this.valor )){
-                this.errores.add(v.getMensaje());
+                // Si el validador es instancia de LargoValidador mostramos el mensaje formateado, sino mostramos los otros mensajes.
+                if (v instanceof LargoValidador){
+                    this.errores.add(((LargoValidador) v).getMensajeFormateado(nombre));
+                } else {
+                    this.errores.add(String.format(v.getMensaje(), this.nombre));
+                }
             }
         }
         return this.errores.isEmpty(); // Si la lista de errores está vacía, quiere decir que esValido es true, por lo que retornamos true.

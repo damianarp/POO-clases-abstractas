@@ -1,7 +1,7 @@
 package com.damianarp.pooclasesabstractas.form.validador;
 
 public class RequeridoValidador extends Validador{
-    protected String mensaje = "Este campo es obligatorio";
+    protected String mensaje = "Este campo %s es obligatorio";
 
     @Override
     public String getMensaje() {

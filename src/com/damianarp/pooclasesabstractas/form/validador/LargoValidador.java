@@ -1,7 +1,7 @@
 package com.damianarp.pooclasesabstractas.form.validador;
 
 public class LargoValidador extends Validador{
-    protected String mensaje = "El campo debe tener mínimo %d caracteres y máximo %d caracteres";
+    protected String mensaje = "El campo %s debe tener mínimo %d caracteres y máximo %d caracteres";
     private int min; // Por defecto, es 0.
     private int max = Integer.MAX_VALUE; // Máximo valor que soporta un Integer.
 
@@ -35,11 +35,15 @@ public class LargoValidador extends Validador{
     // Método para validar la cantidad de caracteres.
     @Override
     public boolean esValido(String valor) {
-        this.mensaje = String.format(this.mensaje, this.min, this.max); // Formateamos el mensaje y le pasamos los valores min y max para que sea más personalizado.
         if (valor == null){
             return true; // Retornamos true ya que utilizaremos el NoNuloValidador para validar si el campo es null o no. De esta manera evitamos el NullPointerException en este método.
         }
         int largo = valor.length();
         return (largo >= min && largo <= max);
+    }
+
+    // Método para obtener el mensaje formateado
+    public String getMensajeFormateado(String campo){
+        return String.format(this.mensaje, campo, this.min, this.max); // Formateamos el mensaje y le pasamos los valores min y max para que sea más personalizado.
     }
 }

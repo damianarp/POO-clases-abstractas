@@ -72,7 +72,7 @@ public class Formulario {
         elementos.forEach(e -> {
             // Si el elemento no es válido, recorremos con un foreach encadenado la lista de errores y lo imprimimos.
             if (!e.esValido()){
-                e.getErrores().forEach(err -> System.out.println(e.getNombre() + ": " + err));
+                e.getErrores().forEach(System.out::println); // Atajo (método referenciado de expresión lambda). Se usa cuando el mismo argumento del foreach se utiliza en un método, equivale a err -> System.out.println(err)
             }
         });
     }
