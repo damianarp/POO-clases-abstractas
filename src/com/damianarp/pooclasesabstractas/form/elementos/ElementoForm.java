@@ -1,7 +1,7 @@
 package com.damianarp.pooclasesabstractas.form.elementos;
 
-import com.damianarp.pooclasesabstractas.form.validador.LargoValidador;
 import com.damianarp.pooclasesabstractas.form.validador.Validador;
+import com.damianarp.pooclasesabstractas.form.validador.mensaje.IMensajeFormateable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,9 +49,9 @@ abstract public class ElementoForm {
         for (Validador v : this.validadores) {
             // Si no es válido, se muestra el mensaje de error de cada validador.
             if (!v.esValido(this.valor )){
-                // Si el validador es instancia de LargoValidador mostramos el mensaje formateado, sino mostramos los otros mensajes.
-                if (v instanceof LargoValidador){
-                    this.errores.add(((LargoValidador) v).getMensajeFormateado(nombre));
+                // Si el validador es instancia de la interface IMensajeFormateable mostramos invocamos el método de la interface y mostramos el mensaje formateado, si no mostramos los otros mensajes.
+                if (v instanceof IMensajeFormateable){
+                    this.errores.add(((IMensajeFormateable) v).getMensajeFormateado(nombre));
                 } else {
                     this.errores.add(String.format(v.getMensaje(), this.nombre));
                 }

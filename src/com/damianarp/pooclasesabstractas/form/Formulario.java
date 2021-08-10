@@ -28,7 +28,7 @@ public class Formulario {
             public String dibujarHtml() {
                 return "<input disabled name=\"" + this.nombre
                         + "\" value=\"" + this.valor
-                        + "\"";
+                        + "\">";
             }
         };
 
