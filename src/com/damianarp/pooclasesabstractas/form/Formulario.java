@@ -19,14 +19,14 @@ public class Formulario {
 
         // Creamos una instancia de SelectForm
         SelectForm lenguaje = new SelectForm("lenguaje");
-        // Agregamos las opciones
+        // Agregamos las opciones.
         lenguaje.addOpcion(new Opcion("1", "Java"))
                 .addOpcion(new Opcion("2", "Python"))
                 .addOpcion(new Opcion("3", "JavaScript"))
                 .addOpcion(new Opcion("4", "TypeScript").setSelected()) // Seleccionamos TypeScript del SelectForm.
                 .addOpcion(new Opcion("5", "PHP"));
 
-        // Creamos un objeto anónimo para crear un input disabled.
+        // Creamos un objeto saludar del tipo ElementoForm con una la clase anónima para crear un input disabled.
         // <input disabled name="this.nombre" value="this.valor">
         ElementoForm saludar = new ElementoForm("saludo") {
             @Override
@@ -45,7 +45,7 @@ public class Formulario {
         experiencia.setValor("... más de 10 años de experiencia ...");
         saludar.setValor("Hola! Que tal? Este campo está deshabilitado!");
 
-        // Creamos un List para agregar todos los objetos creados
+        // Creamos un List para agregar todos los objetos creados.
         List<ElementoForm> elementos = Arrays.asList(username, password, email, edad, experiencia, lenguaje, saludar);
 
         // Iteramos a través de la Api Stream con una expresión lambda.
