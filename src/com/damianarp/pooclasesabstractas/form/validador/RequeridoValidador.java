@@ -13,6 +13,7 @@ public class RequeridoValidador extends Validador{
         this.mensaje = mensaje;
     }
 
+    // Método para validar que el campo sea requerido.
     @Override
     public boolean esValido(String valor) {
         return (valor != null && valor.length() > 0);

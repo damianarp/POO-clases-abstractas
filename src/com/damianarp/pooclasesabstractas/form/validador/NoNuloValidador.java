@@ -13,6 +13,7 @@ public class NoNuloValidador extends Validador{
         this.mensaje = mensaje;
     }
 
+    // Método para validar que el campo no sea nulo.
     @Override
     public boolean esValido(String valor) {
         return (valor != null);

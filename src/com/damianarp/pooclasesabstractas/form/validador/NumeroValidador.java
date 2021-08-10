@@ -13,6 +13,7 @@ public class NumeroValidador extends Validador{
         this.mensaje = mensaje;
     }
 
+    // Método para validar que el campo sea numérico.
     @Override
     public boolean esValido(String valor) {
         try {
